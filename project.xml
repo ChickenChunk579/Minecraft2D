@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<meta title="Minecraft 2D" package="com.chickenchunk.minecraft2D" version="1.0.0" company="ChickenChunk579"/>
+	<meta title="Minecraft2D" if="html5"/>
+	<app main="Main" file="HelloWorld"/>
+
+	<window allow-high-dpi="true"/>
+	<window fps="60"/>
+	<window fps="0" if="html5"/>
+	<window background="#F8F8F8"/>
+	
+	<source path="src"/>
+	
+	<haxelib name="openfl"/>
+	<haxelib name="actuate"/>
+	<haxelib name="feathersui"/>
+
+	<haxedef name="feathersui_theme_manage_stage_color"/>
+
+	<icon path="assets/icons/feathersui-icon.svg"/>
+</project>

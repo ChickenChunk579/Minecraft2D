@@ -28,15 +28,17 @@ jobs:
         haxelib run openfl build ios
     - name: Build Project
       run: |
-        mkdir Minecraft2D.xcarchive
         cd bin/ios
-        xcodebuild -exportArchive -configuration Release PLATFORM_NAME=iphoneos SDKROOT=iphoneos18.1 -project Minecraft2D.xcodeproj -allowProvisioningUpdates -allowProvisioningDeviceRegistration -DCODE_SIGNING_ALLOWED=NO build -exportOptionsPlist Minecraft2D/exportOptions-development.plist -archivePath Minecraft2D.xcarchive
-    
-    - name: Create archive
-      run: zip -r app.zip .
+        xcodebuild archive -project Minecraft2D.xcodeproj -scheme 'Minecraft2D' -archivePath Minecraft2D.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+        mkdir Payload
+        mv Minecraft2D.xcarchive/Products/Applications/Minecraft2D.app Payload/Minecraft2D.app
+
+        zip -r "Minecraft2D.ipa" "Payload"
+
+        mv Minecraft2D.ipa ${{ runner.temp }}/Minecraft2D.ipa
 
     - name: Upload to artifacts
       uses: actions/upload-artifact@v4
       with:
         name: app
-        path: app.zip
+        path: ${{ runner.temp }}/Example-Project.ipa

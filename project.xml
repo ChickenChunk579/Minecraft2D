@@ -2,7 +2,7 @@
 <project>
 	<meta title="Minecraft 2D" package="com.chickenchunk.minecraft2D" version="1.0.0" company="ChickenChunk579"/>
 	<meta title="Minecraft2D" if="html5"/>
-	<app main="Main" file="HelloWorld"/>
+	<app main="Main" file="Minecraft2D"/>
 
 	<window allow-high-dpi="true"/>
 	<window fps="60"/>

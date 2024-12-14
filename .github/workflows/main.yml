@@ -28,6 +28,7 @@ jobs:
         haxelib run openfl build ios
     - name: Build Project
       run: |
+        mkdir Minecraft2D.xcarchive
         cd bin/ios
         xcodebuild -exportArchive -configuration Release PLATFORM_NAME=iphoneos SDKROOT=iphoneos18.1 -project Minecraft2D.xcodeproj -allowProvisioningUpdates -allowProvisioningDeviceRegistration -DCODE_SIGNING_ALLOWED=NO build -exportOptionsPlist Minecraft2D/exportOptions-development.plist -archivePath Minecraft2D.xcarchive
     

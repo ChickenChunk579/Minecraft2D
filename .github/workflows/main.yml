@@ -22,9 +22,12 @@ jobs:
         haxelib install openfl
         haxelib install feathersui
         haxelib run openfl setup
+    - name: Generate Project
+      run: |
+        haxelib run openfl build ios
     - name: Build Project
       run: |
-        haxelib run openfl test ios -Dsource-header=haxe -DCODE_SIGNING_ALLOWED=NO
+        xcodebuild -configuration Release PLATFORM_NAME=iphoneos SDKROOT=iphoneos18.1 -project Minecraft2D.xcodeproj -allowProvisioningUpdates -allowProvisioningDeviceRegistration -DCODE_SIGNING_ALLOWED=NO build
     
     - name: Create archive
       run: zip -r app.zip .

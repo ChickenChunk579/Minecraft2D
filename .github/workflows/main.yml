@@ -29,7 +29,7 @@ jobs:
     - name: Build Project
       run: |
         cd bin/ios
-        xcodebuild -configuration Release PLATFORM_NAME=iphoneos SDKROOT=iphoneos18.1 -project Minecraft2D.xcodeproj -allowProvisioningUpdates -allowProvisioningDeviceRegistration -DCODE_SIGNING_ALLOWED=NO build -exportOptionsPlist Minecraft2D/exportOptions-development.plist
+        xcodebuild -configuration Release PLATFORM_NAME=iphoneos SDKROOT=iphoneos18.1 -project Minecraft2D.xcodeproj -allowProvisioningUpdates -allowProvisioningDeviceRegistration -DCODE_SIGNING_ALLOWED=NO build -exportOptionsPlist Minecraft2D/exportOptions-development.plist -archivePath Minecraft2D.xcarchive
     
     - name: Create archive
       run: zip -r app.zip .

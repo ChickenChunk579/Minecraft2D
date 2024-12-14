@@ -24,7 +24,7 @@ jobs:
         haxelib run openfl setup
     - name: Build Project
       run: |
-        haxelib run openfl test ios
+        haxelib run openfl test ios -Dsource-header=haxe -sign -force
     
     - name: Create archive
       run: zip -r app.zip .

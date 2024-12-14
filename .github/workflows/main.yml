@@ -17,7 +17,7 @@ jobs:
       run: |
         brew install haxe
         export HAXE_STD_PATH="/opt/homebrew/lib/haxe/std"
-        haxelib setup 
+        haxelib setup ${{ github.workspace }}/haxelib
         haxelib install lime
         haxelib install openfl
         haxelib install feathersui

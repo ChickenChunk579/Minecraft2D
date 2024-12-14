@@ -21,6 +21,7 @@ jobs:
         haxelib install lime
         haxelib install openfl
         haxelib install feathersui
+        haxelib run openfl setup
     - name: Build Project
       run: |
         haxelib run openfl test ios

@@ -42,7 +42,7 @@ class Main extends Sprite {
 		addChild(fps);
 		
 		var hudContainer = new LayoutGroup();
-		#if (ios)
+		#if (ios || android)
 		var upButton = new Button(" ", function(e: TriggerEvent) {});
 		upButton.width = 75;
 		upButton.height = 75;
@@ -106,7 +106,19 @@ class Main extends Sprite {
 			}
 		});
 		stage.addEventListener(Event.ENTER_FRAME, function(e: Event) {
-			#if (ios)
+			#if (ios || android)
+			upButton.x = 85;
+			upButton.y = stage.stageHeight - 245;
+
+			downButton.x = 85;
+			downButton.y = stage.stageHeight - 85;
+
+			leftButton.x = 10;
+			leftButton.y = stage.stageHeight - 165;
+
+			rightButton.x = 160;
+			rightButton.y = stage.stageHeight - 165;
+
 			if (upButton.currentState == ButtonState.DOWN) {
 				up = true;
 			} else {

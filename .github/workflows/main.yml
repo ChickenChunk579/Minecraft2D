@@ -42,3 +42,54 @@ jobs:
       with:
         name: app
         path: ${{ runner.temp }}/Minecraft2D.ipa
+    - name: Create app archive
+      run: |
+        zip -r "App.zip" Payload
+    - name: Upload to Appetize
+      uses: appetizeio/github-action-appetize@v1.0.3
+      with:
+        apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
+        app: App.zip
+        platform: 'ios'
+  build-ios-simulator:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
+    - name: Set up Haxe
+      run: |
+        brew install haxe
+        export HAXE_STD_PATH="/opt/homebrew/lib/haxe/std"
+        haxelib setup ${{ github.workspace }}/haxelib
+        haxelib install lime
+        haxelib install openfl
+        haxelib install feathersui
+        haxelib run openfl setup
+    - name: Generate Project
+      continue-on-error: true
+      run: |
+        haxelib run openfl build ios
+    - name: Build Project
+      run: |
+        cd bin/ios
+        xcodebuild archive -project Minecraft2D.xcodeproj -scheme 'Minecraft2D' -archivePath Minecraft2D.xcarchive -configuration Release -sdk iPhoneSimulator18.1 CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+        mkdir Payload
+        mv Minecraft2D.xcarchive/Products/Applications/Minecraft2D.app Payload/Minecraft2D.app
+
+        zip -r "Minecraft2D.ipa" "Payload"
+
+        mv Minecraft2D.ipa ${{ runner.temp }}/Minecraft2D.ipa
+
+    - name: Create app archive
+      run: |
+        zip -r "App.zip" Payload
+    - name: Upload to Appetize
+      uses: appetizeio/github-action-appetize@v1.0.3
+      with:
+        apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
+        app: App.zip
+        platform: 'ios'

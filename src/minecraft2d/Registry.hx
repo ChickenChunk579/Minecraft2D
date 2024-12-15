@@ -8,7 +8,7 @@ import openfl.display.Bitmap;
 
 class Registry {
     public static var blocks: Dictionary<String, BitmapData>;
-    private static var tileset: Tileset;
+    public static var tileset: Tileset;
 
     private static final atlasMap = "minecraft:block/acacia_door_bottom	x=96	y=64	w=16	h=16
 minecraft:block/acacia_door_top	x=112	y=64	w=16	h=16
@@ -1772,10 +1772,14 @@ minecraft:trims/items/leggings_trim_quartz	x=880	y=480	w=16	h=16
 minecraft:trims/items/leggings_trim_redstone	x=880	y=496	w=16	h=16
 ";
 
-    
+    public static var blocksMap = new Dictionary<String, Int>();
 
-    public static function addBlock(name: String, rectange: Rectangle) {
+    public static function init() {
+        tileset = new Tileset(Assets.getBitmapData("textures/atlas.png"));
+    }
 
+    public static function addBlock(name: String, rectangle: Rectangle) {
+        blocksMap[name] = tileset.addRect(rectangle);
     }
 
     public static function registerAllBlocks() {
@@ -1788,8 +1792,8 @@ minecraft:trims/items/leggings_trim_redstone	x=880	y=496	w=16	h=16
             var h: Int = Std.parseInt(parts[4].split('=')[1]);
             var name: String = parts[0];
 
-            if (StringTools.contains(name, "blocks")) {
-                addBlock(StringTools.replace(name, "minecraft:blocks/", ""), new Rectangle(x, y, w, h));
+            if (StringTools.contains(name, "block")) {
+                addBlock(StringTools.replace(name, "minecraft:block/", ""), new Rectangle(x, y, w, h));
             }
         }
     }

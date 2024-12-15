@@ -72,8 +72,8 @@ jobs:
     - name: Generate Project
       continue-on-error: true
       run: |
-        haxelib run openfl build ios
         xcodebuild -showsdks
+        haxelib run openfl build ios
     - name: Build Project
       run: |
         cd bin/ios

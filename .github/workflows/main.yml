@@ -72,12 +72,11 @@ jobs:
     - name: Generate Project
       continue-on-error: true
       run: |
-        xcodebuild -showsdks
         haxelib run openfl build ios
     - name: Build Project
       run: |
         cd bin/ios
-        xcodebuild archive -project Minecraft2D.xcodeproj -scheme 'Minecraft2D' -archivePath Minecraft2D.xcarchive -configuration Release -sdk iPhoneSimulator18.1 CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+        xcodebuild archive -project Minecraft2D.xcodeproj -scheme 'Minecraft2D' -archivePath Minecraft2D.xcarchive -configuration Release -sdk iphonesimulator18.1 CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
         mkdir Payload
         mv Minecraft2D.xcarchive/Products/Applications/Minecraft2D.app Payload/Minecraft2D.app
 

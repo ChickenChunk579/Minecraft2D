@@ -73,6 +73,7 @@ jobs:
       continue-on-error: true
       run: |
         haxelib run openfl build ios
+        xcodebuild -showsdks
     - name: Build Project
       run: |
         cd bin/ios
